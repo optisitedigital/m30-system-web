@@ -2,237 +2,287 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA CASH MACHINE | Premium Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IA CASH MACHINE | L'Élite de l'Intelligence Artificielle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
-            --gold-glow: rgba(212, 175, 55, 0.4);
-            --black: #000000;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --text: #ffffff;
+            --accent: #ffffff;
+            --grey: #888888;
+            --gold: #d4af37; /* Utilisé uniquement pour les badges d'urgence */
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            background-color: var(--black);
-            color: var(--white);
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* --- LOADER / INTRO --- */
+        /* --- ÉCRAN D'ENTRÉE --- */
         #intro-overlay {
             position: fixed;
             inset: 0;
-            background: var(--black);
-            z-index: 10000;
+            background: var(--bg);
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
-        #intro-text {
+        #typewriter-intro {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--gold);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
             text-align: center;
-            opacity: 0;
         }
 
-        /* --- UI UTILS --- */
+        /* --- UTILS --- */
         .container { padding: 20px; max-width: 500px; margin: 0 auto; position: relative; }
-        .gold-gradient { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-        .glass-card { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 24px; padding: 30px; margin-bottom: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: var(--transition); }
-        
-        /* --- ANIMATIONS AU SCROLL --- */
-        .reveal { opacity: 0; transform: translateY(40px) scale(0.95); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .btn-shine { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 3s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-        /* --- BUTTONS --- */
-        .btn {
+        /* --- HERO --- */
+        header { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            text-align: center;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+
+        .urgent-badge { 
+            display: inline-block; 
+            border: 1px solid var(--grey); 
+            padding: 5px 15px; 
+            border-radius: 100px; 
+            font-size: 0.7rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; line-height: 1.1; margin-bottom: 15px; font-weight: 700; }
+        .hero-sub { color: var(--grey); font-size: 1rem; margin-bottom: 40px; }
+
+        /* --- BOUTONS --- */
+        .cta-btn {
             display: block;
             width: 100%;
             padding: 22px;
-            background: linear-gradient(135deg, var(--gold), #f3d06b);
-            color: var(--black);
-            text-align: center;
+            background: var(--accent);
+            color: var(--bg);
             text-decoration: none;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-radius: 50px;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
             position: relative;
-            box-shadow: 0 0 20px var(--gold-glow);
-            transition: var(--transition);
             overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 0 0 rgba(255,255,255,0);
         }
-        .btn:active { transform: scale(0.96); }
-        .btn-shine { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shine 3s infinite; }
-        @keyframes shine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-        /* --- HERO --- */
-        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; background: radial-gradient(circle at top right, #1a150a 0%, #000 70%); }
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; line-height: 1.1; margin-bottom: 20px; }
-        #typewriter { min-height: 3.5rem; display: block; }
-        .sub-hero { color: #888; font-size: 1.1rem; margin-bottom: 40px; }
+        .cta-btn:active { transform: scale(0.95); box-shadow: 0 0 30px rgba(255,255,255,0.3); }
 
-        /* --- TESTIMONIALS --- */
-        .carousel-wrap { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 40px 0; }
-        .carousel-track { display: flex; animation: slideInfinite 40s linear infinite; width: max-content; }
-        .testi-card { width: 280px; height: 320px; background: var(--glass); border: 1px solid rgba(255,255,255,0.05); margin: 0 15px; border-radius: 30px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
-        .t-gain { font-size: 1.8rem; font-weight: 900; color: var(--gold); }
-        .t-info { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #555; }
-        @keyframes slideInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-310px * 10)); } }
+        /* --- SECTIONS --- */
+        .glass-card {
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
 
-        /* --- BADGE URGENCE --- */
-        .urgent-badge { background: rgba(255, 50, 50, 0.1); color: #ff5e5e; padding: 8px 16px; border-radius: 100px; border: 1px solid #ff5e5e; font-size: 0.75rem; font-weight: bold; display: inline-block; margin-bottom: 20px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; text-align: center; }
 
-        footer { text-align: center; padding: 60px 20px; font-size: 0.7rem; color: #333; border-top: 1px solid #111; }
+        /* --- CAROUSEL --- */
+        .carousel-wrap { width: 100vw; margin-left: calc(-50vw + 50%); overflow: hidden; padding: 40px 0; cursor: grab; }
+        .carousel-track { display: flex; width: max-content; animation: scroll 50s linear infinite; }
+        .carousel-track:hover { animation-play-state: paused; }
+
+        .testi-card {
+            width: 250px;
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 25px;
+            margin: 0 15px;
+            border-radius: 4px;
+            transform: perspective(1000px) rotateY(10deg);
+            transition: var(--transition);
+        }
+
+        .testi-card:hover { transform: perspective(1000px) rotateY(0deg) scale(1.05); border-color: var(--accent); }
+
+        .t-gain { font-size: 1.5rem; font-weight: 900; margin-bottom: 5px; }
+        .t-info { font-size: 0.7rem; color: var(--grey); text-transform: uppercase; letter-spacing: 1px; }
+        .t-text { font-size: 0.85rem; margin-top: 15px; font-style: italic; color: #ccc; }
+
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- FOOTER / OFFRE --- */
+        .price-box { font-size: 3rem; font-weight: 900; margin: 20px 0; }
+        .old-price { text-decoration: line-through; color: var(--grey); font-size: 1.2rem; margin-right: 10px; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #111; color: #333; font-size: 0.7rem; }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <div id="intro-text">Prêt à changer ta vie ?</div>
+        <div id="typewriter-intro"></div>
     </div>
 
     <main id="main-content" style="opacity:0;">
         <header class="container">
-            <div class="urgent-badge">🔥 OFFRE LIMITÉE - ACCÈS PRIORITAIRE</div>
-            <h1><span id="typewriter"></span></h1>
-            <p class="sub-hero">L'IA travaille pour vous. Découvrez la méthode exacte pour automatiser vos revenus dès aujourd'hui.</p>
-            <button class="btn cta-trigger">Accéder au guide maintenant<span class="btn-shine"></span></button>
+            <div class="urgent-badge">OFFRE MONDIALE - ÉDITION LIMITÉE</div>
+            <h1>Encaissez avec l'IA, <br>Où que vous soyez.</h1>
+            <p class="hero-sub">Le guide stratégique pour automatiser vos revenus en 2026. Accessible partout dans le monde.</p>
+            <a href="https://imtlsxiv.mychariow.shop/ai-cash-machine" class="cta-btn trigger-discord">
+                Obtenir le guide - $3 au lieu de $10
+                <span class="btn-shine"></span>
+            </a>
         </header>
 
         <section class="container reveal">
-            <h2 style="margin-bottom: 30px; font-size: 2rem;">Le constat est <span style="color:#ff5e5e">brutal</span>.</h2>
+            <h2>Pourquoi vous stagnez ?</h2>
             <div class="glass-card">
-                <p>95% des gens échouent car ils sont perdus dans la <strong>confusion</strong>, manquent de <strong>stratégie</strong> et perdent leur temps.</p>
+                <p style="color: #bbb;">Le manque de <strong>méthode précise</strong> et les mauvaises stratégies vous font perdre votre atout le plus précieux : votre temps.</p>
             </div>
         </section>
 
         <section class="container reveal">
-            <h2 style="margin-bottom: 30px; font-size: 2rem;">La <span class="gold-gradient">Solution</span>.</h2>
-            <div class="glass-card" style="border-color: #00c85155;">
-                <p>Ma méthode transforme l'IA en une source de profit constante avec un plan <strong>étape par étape</strong> accessible à tous.</p>
+            <h2>La Révolution IA</h2>
+            <div class="glass-card" style="border-color: #444;">
+                <p>L'Intelligence Artificielle n'est pas un gadget. C'est un levier. Ma méthode étape par étape simplifie tout pour vous permettre de générer des profits réels.</p>
             </div>
         </section>
 
         <section class="reveal">
-            <h2 style="text-align:center; margin-bottom: 20px;">Ils encaissent déjà</h2>
+            <h2>Résultats Internationaux</h2>
             <div class="carousel-wrap">
-                <div class="carousel-track" id="track"></div>
+                <div class="carousel-track" id="track">
+                    </div>
             </div>
         </section>
 
-        <section class="container reveal" style="padding-bottom: 100px;">
-            <div class="glass-card" style="background: radial-gradient(circle at top left, rgba(212,175,55,0.1), transparent);">
-                <h3 style="font-family: 'Playfair Display'; font-size: 2rem; margin-bottom: 15px;">IA Cash <span class="gold-gradient">Machine</span></h3>
-                <ul style="list-style: none; margin-bottom: 30px;">
-                    <li>✨ 15 niches IA ultra-rentables</li>
-                    <li>🤖 Automatisation totale</li>
-                    <li>💰 Stratégie de vente sans visage</li>
+        <section class="container reveal">
+            <div class="glass-card" style="text-align: center; border: 1px solid var(--accent);">
+                <h3>IA CASH MACHINE</h3>
+                <p style="font-size: 0.8rem; margin-top: 10px;">Transformation Digitale Complète</p>
+                <div class="price-box">
+                    <span class="old-price">$10</span>$3
+                </div>
+                <ul style="list-style: none; text-align: left; margin-bottom: 30px; font-size: 0.9rem;">
+                    <li>✓ 15 Niches IA inexploitées</li>
+                    <li>✓ Stratégie Copy-Paste</li>
+                    <li>✓ Automatisation Totale</li>
                 </ul>
-                <div style="font-size: 2.5rem; font-weight: 900; margin-bottom: 20px;">3$ <span style="font-size: 1rem; text-decoration: line-through; color: #555;">10$</span></div>
-                <button class="btn cta-trigger">Débloquer mon accès<span class="btn-shine"></span></button>
+                <a href="https://imtlsxiv.mychariow.shop/ai-cash-machine" class="cta-btn trigger-discord">
+                    Débloquer l'accès - $3
+                    <span class="btn-shine"></span>
+                </a>
             </div>
         </section>
 
-        <footer>  
-            <p>&copy; 2026 IA CASH MACHINE. TOUS DROITS RÉSERVÉS.</p>
+        <footer>
+            <p>© 2026 IA CASH MACHINE. TOUS DROITS RÉSERVÉS.</p>
+            <p>Le succès dépend de votre mise en application.</p>
         </footer>
     </main>
 
     <script>
         const REDIRECT_URL = "https://imtlsxiv.mychariow.shop/ai-cash-machine";
-        const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1463375154313695425/b8j4vFvQYxlrrtYrxSXgOrV3PEsdA4vXaywKb8xIMo6qEt6vVAqc3yQb_srF7-aDg4a-";
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1463375154313695425/b8j4vFvQYxlrrtYrxSXgOrV3PEsdA4vXaywKb8xIMo6qEt6vVAqc3yQb_srF7-aDg4a-";
 
-        // Intro
-        window.addEventListener('load', () => {
-            const overlay = document.getElementById('intro-overlay');
-            const main = document.getElementById('main-content');
-            const txt = document.getElementById('intro-text');
+        // 1. TYPEWRITER INTRO
+        const introText = "Prêt à changer ta vie ?";
+        const introEl = document.getElementById('typewriter-intro');
+        let i = 0;
 
-            setTimeout(() => txt.style.opacity = '1', 500);
-            setTimeout(() => {
-                overlay.style.transform = 'translateY(-100%)';
-                main.style.opacity = '1';
-                startTypewriter();
-            }, 2500);
-        });
-
-        // Typewriter
-        function startTypewriter() {
-            const text = "Transforme ton téléphone en machine à cash avec l’IA";
-            const el = document.getElementById('typewriter');
-            let i = 0;
-            function type() {
-                if (i < text.length) {
-                    el.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 50);
-                }
+        function typeIntro() {
+            if (i < introText.length) {
+                introEl.textContent += introText.charAt(i);
+                i++;
+                setTimeout(typeIntro, 70);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('intro-overlay').style.transform = 'translateY(-100%)';
+                    document.getElementById('main-content').style.opacity = '1';
+                    document.getElementById('main-content').style.transition = 'opacity 1s ease';
+                }, 1000);
             }
-            type();
         }
 
-        // Carousel
-        const feedback = [
-            {n: "Marc", p: "France", g: "125$", t: "Passé de 0 à mon premier gain en 48h."},
-            {n: "Sarah", p: "Belgique", g: "60$", t: "Le chapitre sur TikTok est fou."},
-            {n: "Yanis", p: "Suisse", g: "210$", t: "L'IA fait tout le travail pénible."},
-            {n: "Amadou", p: "Sénégal", g: "45$", t: "Méthode simple et rapide."},
-            {n: "Julie", p: "Canada", g: "180$", t: "Enfin du concret !"},
-            {n: "Kevin", p: "France", g: "95$", t: "Rentabilisé en une soirée."},
-            {n: "Léa", p: "Luxembourg", g: "300$", t: "Indispensable pour 2026."},
-            {n: "Thomas", p: "France", g: "75$", t: "Les prompts sont magiques."},
-            {n: "Fatou", p: "Côte d'Ivoire", g: "50$", t: "L'IA est incroyable."},
-            {n: "Alex", p: "France", g: "140$", t: "Je recommande à 100%."}
+        // 2. CAROUSEL DATA
+        const testimonials = [
+            {n:"Liam", p:"USA", g:"$1,250", t:"L'IA a fait en 2 jours ce que je faisais en 1 mois."},
+            {n:"Amara", p:"Nigeria", g:"$450", t:"Gagner de l'argent en ligne est enfin devenu concret."},
+            {n:"Yanis", p:"France", g:"$2,100", t:"Le chapitre sur les prompts est une mine d'or."},
+            {n:"Sofia", p:"Brésil", g:"$800", t:"Simple, rapide, et surtout très rentable."},
+            {n:"Chen", p:"Chine", g:"$3,400", t:"La stratégie mobile-first est révolutionnaire."},
+            {n:"Elena", p:"Italie", g:"$1,100", t:"J'ai rentabilisé les $3 en moins de 4 heures."},
+            {n:"Omar", p:"Maroc", g:"$670", t:"Une méthode accessible partout dans le monde."},
+            {n:"Lucas", p:"Canada", g:"$1,500", t:"L'ebook le plus clair que j'ai acheté."},
+            {n:"Fatou", p:"Sénégal", g:"$300", t:"L'automatisation m'a sauvé un temps fou."},
+            {n:"Aiden", p:"Australie", g:"$2,800", t:"L'IA travaille pendant que je dors."}
         ];
+
         const track = document.getElementById('track');
-        [...feedback, ...feedback].forEach(i => {
+        [...testimonials, ...testimonials].forEach(item => {
             const card = document.createElement('div');
             card.className = 'testi-card';
-            card.innerHTML = `<div><div class="t-gain">+ ${i.g}</div><div class="t-info">${i.n} • ${i.p}</div></div><p style="font-size: 0.85rem; font-style: italic; color: #ccc;">"${i.t}"</p>`;
+            card.innerHTML = `
+                <div class="t-gain">${item.g}</div>
+                <div class="t-info">${item.n} • ${item.p}</div>
+                <div class="t-text">"${item.t}"</div>
+            `;
             track.appendChild(card);
         });
 
-        // Reveal
-        const obs = new IntersectionObserver((es) => {
-            es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active') });
+        // 3. SCROLL REVEAL
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-        // --- DISCORD TRACKING FIX ---
-        document.querySelectorAll('.cta-trigger').forEach(btn => {
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 4. DISCORD TRACKING & REDIRECTION
+        document.querySelectorAll('.trigger-discord').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // On envoie le signal à ton Webhook
                 fetch(WEBHOOK_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        content: "🔥 **NOUVEL ACHAT POTENTIEL** \nUn utilisateur vient de cliquer sur le bouton pour accéder au guide !" 
-                    }),
-                    keepalive: true // Crucial pour que le signal parte avant la redirection
+                    body: JSON.stringify({ content: "🔥 **ACTION DÉTECTÉE** : Un futur client vient de cliquer sur le bouton d'achat ($3) !" }),
+                    keepalive: true
                 });
 
-                // Redirection immédiate
                 window.location.href = REDIRECT_URL;
             });
         });
+
+        window.onload = typeIntro;
     </script>
 </body>
 </html>
