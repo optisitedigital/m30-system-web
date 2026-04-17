@@ -126,6 +126,59 @@
         .faq-item i { transition: 0.4s; font-size: 1.2rem; }
         .faq-item.active i { transform: rotate(180deg); }
 
+        /* --- STYLE SECTION FINAL CTA --- */
+    .final-cta {
+    background: var(--text); /* Fond noir pour trancher */
+    color: var(--bg);
+    text-align: center;
+    border-radius: 40px; /* Bords arrondis pour un look moderne */
+    margin: 40px 20px; /* Espacement pour ne pas coller aux bords */
+    padding: 100px 20px;
+}
+
+.final-cta h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
+}
+
+.final-cta p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Bouton secondaire (plus discret) */
+.btn-secondary {
+    color: var(--bg);
+    text-decoration: underline;
+    font-weight: 700;
+    padding: 15px;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    opacity: 0.7;
+}
+
+/* Adaptation pour Ordinateur */
+@media (min-width: 768px) {
+    .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 25px;
+    }
+} 
+        
         /* --- 10. FOOTER --- */
         footer { padding: 80px 20px; text-align: center; border-top: 1px solid #eee; background: #fafafa; }
         .socials { display: flex; justify-content: center; gap: 30px; margin: 35px 0; font-size: 1.8rem; }
@@ -235,6 +288,7 @@
 
     <section class="testimonials">
         <div class="t-track">
+            <h2>Leurs Succès Parlent Pour Nous Rejoins Toi Aussi la Communauté des Entrepreneurs Qui Réussissent !</h2>
             <div class="t-card"><p>"J’ai fait mes premières ventes grâce à M30 en 1 semaine."</p><strong>Junior</strong></div>
             <div class="t-card"><p>"Enfin un système adapté au Mobile Money et WhatsApp."</p><strong>Grâce</strong></div>
             <div class="t-card"><p>"Je ne pensais pas gagner autant avec mon tel."</p><strong>Kevin</strong></div>
@@ -273,13 +327,27 @@
                 <div class="faq-question">Y a-t-il un accompagnement inclus ? <i class="fas fa-plus"></i></div>
                 <div class="faq-answer">Oui, un canal de support et une communauté sont disponibles pour répondre à toutes tes questions.</div>
             </div>
-           <div class="faq-item reveal">
-                <div class="faq-question">Tu as une autre question ?<i class="fas fa-plus"></i></div>
-                <div class="faq-answer">Contacte-nous sur WhatsApp ! appuyer sur le bouton.</div>
+             <div class="faq-item reveal">
+                 <div class="faq-question">Tu as une autre question ?<i class="fas fa-plus"></i></div>
+                 <div class="faq-answer">Contacte-nous sur WhatsApp ! appuyer sur le bouton.</div>
             </div>    
         </div>
     </section>
-
+   <section class="section final-cta">
+    <div class="cta-content reveal">
+        <h2>Ne Laisse Plus Tes Rêves Attendre. Agis Maintenant !</h2>
+        <p>Choisis la formation qui te convient le mieux et commence à construire ton système de revenus en ligne dès aujourd'hui.</p>
+        
+        <div class="cta-buttons">
+            <a href="https://lgpvphnr.mychariow.shop/prd_798ctp" class="btn-main">
+                Découvrir M30 SYSTEM (Mon Offre Complète)
+            </a>
+            <a href="https://lgpvphnr.mychariow.shop" class="btn-secondary">
+                Voir Toutes Nos Formations
+            </a>
+        </div>
+    </div>
+</section>
     <footer>
         <h2 style="font-weight: 900; letter-spacing: -1.5px; font-size: 2rem;">M30 SYSTEM</h2>
         <div class="socials">
