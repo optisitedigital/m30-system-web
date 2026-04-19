@@ -10,20 +10,21 @@
     
     <style>
         :root {
-            /* Palette modifiée : Bleu nuit profond et Cyan accent */
-            --bg: #0a0f1d; /* Fond bleu nuit très sombre */
-            --text: #e2e8f0; /* Texte gris très clair (presque blanc) */
-            --accent: #00d2ff; /* Cyan vif pour l'accentuation */
-            --gray: #161e2d; /* Gris-bleu sombre pour les cartes */
-            --glow: rgba(0, 210, 255, 0.3); /* Lueur cyan */
+            /* Palette Premium : Noir Profond et Or Métallique */
+            --bg: #000000; /* Fond noir pur */
+            --text: #ffffff; /* Texte blanc pur */
+            --accent: #bf953f; /* Or de base */
+            --gold-bright: #fcf6ba; /* Or brillant pour les reflets */
+            --gray: #111111; /* Gris très sombre pour les cartes */
+            --glow: rgba(191, 149, 63, 0.4); /* Lueur dorée */
             --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* --- SPLASH SCREEN --- */
+        /* --- SPLASH SCREEN (NOIR & OR) --- */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #0a0f1d; /* Couleur modifiée */
+            background: #000000; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,12 +37,13 @@
         }
         .splash-logo {
             width: 150px;
-            filter: drop-shadow(0 0 10px var(--accent)); /* Ajout lueur */
+            /* Lueur dorée sur le logo */
+            filter: drop-shadow(0 0 15px var(--accent)); 
             animation: splashPulse 2s ease-in-out infinite;
         }
         @keyframes splashPulse {
             0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -54,478 +56,735 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: var(--transition); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         
-        /* Effet tactile sur les boutons */
+        /* BOUTON MAIN (OR MÉTTALIQUE) */
         .btn-main { 
-            background: var(--accent); /* Couleur modifiée */
-            color: #050505; /* Texte sombre pour contraste */
-            padding: 18px 30px; 
+            /* Dégradé Or Premium */
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%); 
+            color: #000000; /* Texte noir pour contraste luxe */
+            padding: 18px 35px; 
             text-decoration: none; 
             border-radius: 50px; 
-            font-weight: 700; 
+            font-weight: 800; 
             display: inline-block; 
             transition: var(--transition); 
             text-align: center; 
             border: none; 
             cursor: pointer; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
         .btn-main:active { transform: scale(0.95); }
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 10px 25px var(--glow); } /* Lueur modifiée */
-
-        /* --- 1. HEADER --- */
-        header { 
-            position: fixed; 
-            top: 0; width: 100%; 
-            padding: 15px 20px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(10, 15, 29, 0.9); /* Couleur modifiée (semi-transparent) */
-            backdrop-filter: blur(15px); 
-            z-index: 2000; 
-            border-bottom: 1px solid rgba(255,255,255,0.05); /* Bordure modifiée */
-            transition: transform 0.3s ease; 
+        .btn-main:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 10px 30px var(--glow); /* Lueur dorée au survol */
         }
-        .logo img { height: 45px; transition: var(--transition); }
+
+        /* --- 1. HEADER (NOIR & OR PREMIUM) --- */
+header { 
+    position: fixed; 
+    top: 0; width: 100%; 
+    padding: 15px 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    /* Fond noir avec transparence luxe et flou */
+    background: rgba(0, 0, 0, 0.85); 
+    backdrop-filter: blur(15px); 
+    z-index: 2000; 
+    /* Bordure fine dorée en bas */
+    border-bottom: 1px solid rgba(191, 149, 63, 0.2); 
+    transition: transform 0.3s ease; 
+}
+
+.logo img { 
+    height: 45px; 
+    transition: var(--transition); 
+    /* Ajoute une légère brillance au logo */
+    filter: drop-shadow(0 0 5px rgba(191, 149, 63, 0.3));
+}
+
+/* HAMBURGER DORÉ */
+.hamburger { 
+    cursor: pointer; 
+    z-index: 2100; 
+    padding: 10px; 
+    border-radius: 50%; 
+    transition: background 0.3s; 
+}
+
+.hamburger:active { 
+    background: rgba(191, 149, 63, 0.1); 
+}
+
+.hamburger span { 
+    display: block; 
+    width: 25px; 
+    height: 2px; 
+    /* Couleur Or Métallique */
+    background: linear-gradient(to right, #bf953f, #fcf6ba); 
+    margin: 6px 0; 
+    transition: 0.4s; 
+    transform-origin: center; 
+}
+
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(-45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(45deg); }
+
+/* MENU DE NAVIGATION (PLEIN ÉCRAN NOIR) */
+.nav-menu { 
+    position: fixed; 
+    top: 0; right: -100%; 
+    width: 100%; height: 100vh; 
+    background: #000000; /* Fond noir profond */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1); 
+    z-index: 2050; 
+}
+
+.nav-menu.active { right: 0; }
+
+.nav-menu a { 
+    color: #ffffff; 
+    font-size: 1.8rem; 
+    text-decoration: none; 
+    margin: 15px 0; 
+    font-weight: 900; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    transition: 0.3s; 
+}
+
+/* Effet au survol des liens du menu */
+.nav-menu a:hover { 
+    color: #bf953f; 
+    background: linear-gradient(to right, #bf953f, #fcf6ba);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-menu a:active { 
+    transform: scale(0.9); 
+    opacity: 0.7; 
+}
+        //* --- 2. FLOATING WHATSAPP (PREMIUM) --- */
+.wa-float { 
+    position: fixed; 
+    bottom: 25px; 
+    right: 20px; 
+    background: #000000; /* Noir pour le luxe */
+    color: #bf953f; /* Or */
+    padding: 14px 22px; 
+    border-radius: 50px; 
+    text-decoration: none; 
+    font-weight: 800; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    z-index: 1000; 
+    box-shadow: 0 10px 30px rgba(191, 149, 63, 0.2); 
+    font-size: 0.9rem; 
+    border: 1.5px solid #bf953f; /* Bordure or distinctive */
+    transition: var(--transition); 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wa-float i { 
+    font-size: 1.3rem; 
+    color: #bf953f; 
+}
+
+.wa-float:hover { 
+    background: #bf953f; 
+    color: #000; 
+    transform: translateY(-5px);
+}
+
+.wa-float:hover i { 
+    color: #000; 
+}
+
+.wa-float:active { transform: scale(0.9); }
+        /* --- 3. HERO SECTION (NOIR & OR PREMIUM) --- */
+.hero { 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    padding: 120px 20px 40px; 
+    /* Dégradé radial noir avec une touche de luxe au centre */
+    background: radial-gradient(circle at center, #1a150a 0%, #000000 100%); 
+    overflow: hidden; 
+}
+
+.hero h1 { 
+    font-size: 3.2rem; 
+    font-weight: 900; 
+    line-height: 1.1; 
+    margin-bottom: 25px; 
+    letter-spacing: -2px; 
+    /* Effet Or Métallique */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p { 
+    font-size: 1.2rem; 
+    color: #cbd5e0; 
+    margin-bottom: 40px; 
+    max-width: 650px; 
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.hero img { 
+    width: 100%; 
+    max-width: 550px; 
+    border-radius: 30px; 
+    /* Lueur dorée diffuse derrière l'image */
+    box-shadow: 0 30px 60px rgba(191, 149, 63, 0.15); 
+    margin-top: 20px; 
+    transition: var(--transition); 
+    /* Bordure or très fine */
+    border: 1px solid rgba(191, 149, 63, 0.2); 
+}
+
+.hero img:hover { 
+    transform: translateY(-10px) scale(1.02); 
+    border-color: #bf953f;
+    box-shadow: 0 40px 80px rgba(191, 149, 63, 0.25);
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1.1rem; }
+}        /* --- 4. SECTION PROBLÈME (PREMIUM NOIR & OR) --- */
+.problem { 
+    background: #000000; /* Noir pur */
+    color: #ffffff; 
+    text-align: center; 
+    padding: 80px 20px;
+    border-radius: 40px 40px 0 0; 
+}
+
+.problem h2 { 
+    font-size: 2.5rem; 
+    margin-bottom: 50px; 
+    font-weight: 900; 
+    letter-spacing: -1px; 
+    /* Effet texte doré */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.p-grid { 
+    display: grid; 
+    gap: 20px; 
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.p-card { 
+    border: 1px solid rgba(191, 149, 63, 0.3); /* Bordure or semi-transparente */
+    padding: 40px 30px; 
+    border-radius: 24px; 
+    transition: all 0.3s ease; 
+    background: rgba(255, 255, 255, 0.03); /* Fond sombre luxe */
+}
+
+.p-card:hover { 
+    background: rgba(191, 149, 63, 0.1); 
+    border-color: #bf953f; 
+    transform: translateY(-10px);
+}
+
+/* Correction de l'icône manquante et style or */
+.p-card i { 
+    font-size: 2.5rem; 
+    margin-bottom: 20px; 
+    display: inline-block; 
+    /* Couleur Or Premium */
+    color: #bf953f;
+    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+/* --- STYLE SCÉNARIOS MINIMALISTE (PREMIUM NOIR & OR) --- */
+.scenarios-minimal {
+    background: #000000; /* Le fond de la section */
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.scenarios-minimal h2 {
+    /* Le titre "Scénarios" avec l'effet doré */
+    font-size: 2.2rem;
+    font-weight: 900;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.s-minimal-grid {
+    /* La grille qui aligne les cartes (2 colonnes sur ordi) */
+    display: grid;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.s-min-card {
+    /* Le design de chaque carte de scénario */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px;
+    background: #111111; 
+    border: 1px solid rgba(191, 149, 63, 0.2);
+    border-radius: 24px;
+    transition: all 0.3s ease;
+}
+
+.s-min-card i {
+    /* L'icône à gauche du scénario */
+    font-size: 1.8rem;
+    color: #bf953f;
+}
+
+.highlight-min {
+    /* La version "mise en avant" (celle qui brille plus) */
+    border: 2px solid #bf953f;
+    background: linear-gradient(145deg, #111111, #1a150a);
+    box-shadow: 0 10px 30px rgba(191, 149, 63, 0.15);
+}
+
+/* --- 6. SECTION FORMATIONS (PREMIUM NOIR & OR) --- */
+.formations {
+    background: #000000;
+    padding: 80px 20px;
+}
+
+.formations h2 { 
+    font-size: 2.8rem; 
+    text-align: center; 
+    margin-bottom: 50px; 
+    font-weight: 900; 
+    letter-spacing: -1.5px; 
+    /* Titre en Or dégradé */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.f-grid { 
+    display: grid; 
+    gap: 25px; 
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.f-card { 
+    background: #111111; /* Gris luxe très sombre */
+    padding: 45px 30px; 
+    border-radius: 28px; 
+    text-decoration: none; 
+    color: inherit; 
+    transition: var(--transition); 
+    position: relative; 
+    border: 1px solid rgba(191, 149, 63, 0.1); /* Bordure or très discrète */
+    overflow: hidden;
+}
+
+.f-card:hover { 
+    transform: translateY(-12px); 
+    border-color: #bf953f; 
+    background: #161616; 
+    box-shadow: 0 20px 40px rgba(191, 149, 63, 0.1); 
+}
+
+.f-card:active { 
+    transform: scale(0.98); 
+}
+
+/* Icônes en Or */
+.f-card i { 
+    font-size: 2.8rem; 
+    margin-bottom: 25px; 
+    display: inline-block;
+    color: #bf953f;
+    background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #aa771c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.f-card h3 { 
+    font-size: 1.5rem; 
+    margin-bottom: 12px; 
+    font-weight: 900; 
+    letter-spacing: -0.5px; 
+    color: #ffffff; 
+}
+
+.f-card p {
+    color: #cbd5e0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Lien "En savoir plus" stylisé */
+.f-card span { 
+    font-weight: 800; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    color: #bf953f; 
+    display: inline-block; 
+    margin-top: 15px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #bf953f; 
+    transition: 0.3s;
+}
+
+.f-card:hover span {
+    color: #fcf6ba;
+    border-color: #fcf6ba;
+    padding-right: 10px; /* Petit effet de mouvement */
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .f-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+        /* --- 7. À PROPOS (PREMIUM NOIR & OR) --- */
+.about { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    background: #000000;
+    padding: 80px 20px;
+}
+
+.about-img { 
+    width: 280px; 
+    height: 280px; 
+    border-radius: 35px; 
+    object-fit: cover; 
+    /* Bordure Or Métallique épaisse */
+    border: 6px solid #bf953f;
+    padding: 5px;
+    background: linear-gradient(135deg, #bf953f, #fcf6ba, #aa771c);
+    margin-bottom: 35px; 
+    transition: var(--transition); 
+    box-shadow: 0 20px 40px rgba(191, 149, 63, 0.2);
+}
+
+.about-img:hover { 
+    transform: rotate(3deg) scale(1.05); 
+    border-color: #fcf6ba; 
+}
+
+.about h2 { 
+    font-size: 2.8rem; 
+    font-weight: 900; 
+    margin-bottom: 25px; 
+    letter-spacing: -1px; 
+    /* Titre Doré */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-stats { 
+    display: flex; 
+    gap: 15px; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    margin-top: 35px; 
+}
+
+.stat-item { 
+    background: #111111; /* Fond sombre luxe */
+    padding: 18px 28px; 
+    border-radius: 20px; 
+    font-weight: 800; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    font-size: 0.9rem; 
+    color: #fcf6ba; /* Texte Or clair */
+    border: 1px solid rgba(191, 149, 63, 0.3);
+    transition: 0.3s;
+}
+
+.stat-item:hover {
+    background: rgba(191, 149, 63, 0.1);
+    transform: translateY(-5px);
+}
+
+.stat-item i {
+    font-size: 1.2rem;
+    color: #bf953f;
+}
+
+       /* --- 8. TÉMOIGNAGES (NOIR & OR) --- */
+.testimonials { 
+    background: #000000; 
+    padding: 100px 0; 
+    overflow: hidden; 
+    border-top: 1px solid rgba(191, 149, 63, 0.1); 
+}
+
+.t-track { display: flex; width: calc(320px * 20); animation: scroll 40s linear infinite; }
+
+.t-card { 
+    width: 320px; 
+    background: #111111; 
+    color: #ffffff; 
+    margin: 0 15px; 
+    padding: 40px; 
+    border-radius: 30px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+    border: 1px solid rgba(191, 149, 63, 0.1); 
+}
+
+.t-card strong { 
+    color: #bf953f; /* Nom en Or */
+    display: block;
+    margin-bottom: 5px;
+}
+
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-320px * 10)); } }
+
+/* --- 9. FAQ (STYLE LUXE) --- */
+.faq-container { max-width: 850px; margin: 0 auto; padding: 40px 20px; }
+
+.faq-item { 
+    border-bottom: 1px solid rgba(191, 149, 63, 0.1); 
+    padding: 25px 0; 
+    cursor: pointer; 
+}
+
+.faq-question { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    font-weight: 800; 
+    font-size: 1.15rem; 
+    color: #ffffff; 
+}
+
+.faq-answer { 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    color: #cbd5e0; 
+    font-size: 1rem; 
+}
+
+.faq-item.active .faq-answer { max-height: 300px; margin-top: 20px; }
+
+.faq-item i { 
+    transition: 0.4s; 
+    color: #bf953f; /* Flèche en Or */
+}
+
+.faq-item.active i { transform: rotate(180deg); color: #fcf6ba; }
+
+/* --- STYLE SECTION FINAL CTA (PREMIUM) --- */
+.final-cta {
+    background: radial-gradient(circle at top, #1a150a 0%, #000000 100%);
+    color: #ffffff;
+    text-align: center;
+    border-radius: 40px;
+    margin: 60px 20px;
+    padding: 100px 20px;
+    border: 1.5px solid #bf953f; /* Bordure Or */
+    box-shadow: 0 0 40px rgba(191, 149, 63, 0.1);
+}
+
+.final-cta h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    /* Titre en Or Métallique */
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.final-cta p {
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: 0 auto 40px;
+    color: #e2e8f0;
+}
+
+/* Bouton secondaire Or discret */
+.btn-secondary {
+    color: #bf953f;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    font-weight: 800;
+    padding: 10px 20px;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-secondary:hover {
+    color: #fcf6ba;
+    border-bottom-color: #fcf6ba;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .cta-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+    }
+}
         
-        .hamburger { cursor: pointer; z-index: 2100; padding: 10px; border-radius: 50%; transition: background 0.3s; }
-        .hamburger:active { background: rgba(255,255,255,0.1); }
-        .hamburger span { 
-            display: block; 
-            width: 25px; 
-            height: 2px; 
-            background: var(--accent); /* Couleur modifiée */
-            margin: 6px 0; 
-            transition: 0.4s; 
-            transform-origin: center; 
-        }
-        
-        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(-45deg); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(45deg); }
+        /* --- STYLE FOOTER (LUXE NOIR & OR) --- */
+.footer {
+    background: #050505; /* Noir profond */
+    color: #ffffff;
+    padding: 80px 20px 30px;
+    border-radius: 40px 40px 0 0;
+    /* Ligne supérieure en Or */
+    border-top: 2px solid #bf953f; 
+}
 
-        .nav-menu { 
-            position: fixed; 
-            top: 0; right: -100%; 
-            width: 100%; height: 100vh; 
-            background: #0a0f1d; /* Couleur modifiée */
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            transition: 0.6s cubic-bezier(0.77, 0, 0.175, 1); 
-            z-index: 2050; 
-        }
-        .nav-menu.active { right: 0; }
-        .nav-menu a { 
-            color: var(--text); 
-            font-size: 1.8rem; 
-            text-decoration: none; 
-            margin: 15px 0; 
-            font-weight: 900; 
-            text-transform: uppercase; 
-            letter-spacing: -1px; 
-            transition: 0.3s; 
-        }
-        .nav-menu a:hover { color: var(--accent); } /* Survol modifié */
-        .nav-menu a:active { transform: scale(0.9); opacity: 0.7; }
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 40px;
+    padding-bottom: 40px;
+}
 
-        /* --- 2. FLOATING WHATSAPP --- */
-        .wa-float { 
-            position: fixed; 
-            bottom: 25px; 
-            right: 20px; 
-            background: #25d366; /* Gardé vert pour l'identité WhatsApp */
-            color: #fff; 
-            padding: 14px 22px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            z-index: 1000; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
-            font-size: 0.9rem; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            transition: var(--transition); 
-        }
-        .wa-float:active { transform: scale(0.9); }
+.footer-section h4 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* Titre de section en Or */
+    color: #bf953f;
+}
 
-        /* --- 3. HERO SECTION --- */
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            padding: 100px 20px 40px; 
-            background: radial-gradient(circle at center, #1a243a 0%, #0a0f1d 100%); /* Dégradé ajouté */
-            overflow: hidden; 
-        }
-        .hero h1 { 
-            font-size: 3.2rem; 
-            font-weight: 900; 
-            line-height: 1; 
-            margin-bottom: 20px; 
-            letter-spacing: -2px; 
-            color: #fff; /* Couleur modifiée */
-        }
-        .hero p { font-size: 1.15rem; color: #a0aec0; margin-bottom: 35px; max-width: 600px; font-weight: 400; }
-        .hero img { 
-            width: 100%; 
-            max-width: 550px; 
-            border-radius: 25px; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); /* Ombre modifiée */
-            margin-top: 20px; 
-            transition: var(--transition); 
-            border: 1px solid rgba(255,255,255,0.05); /* Bordure modifiée */
-        }
-        .hero img:hover { transform: translateY(-5px); }
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
 
-        /* --- 4. SECTION PROBLÈME --- */
-        .problem { 
-            background: #0f172a; /* Bleu foncé modifiée */
-            color: var(--text); 
-            text-align: center; 
-            border-radius: 40px 40px 0 0; 
-        }
-        .problem h2 { font-size: 2.5rem; margin-bottom: 50px; font-weight: 900; letter-spacing: -1px; color: #fff; }
-        .p-grid { display: grid; gap: 20px; }
-        .p-card { 
-            border: 1px solid rgba(255,255,255,0.1); /* Bordure modifiée */
-            padding: 40px 30px; 
-            border-radius: 24px; 
-            transition: var(--transition); 
-            background: rgba(255,255,255,0.02); /* Fond léger */
-        }
-        .p-card:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); }
-        .p-card i { font-size: 2.2rem; margin-bottom: 20px; display: block; color: var(--accent); } /* Icone modifiée */
+.footer-section ul li {
+    margin-bottom: 15px;
+}
 
-        /* --- STYLE SCÉNARIOS MINIMALISTE --- */
-        .scenarios-minimal {
-            background: var(--bg); /* Couleur modifiée */
-            padding: 60px 20px;
-            text-align: center;
-        }
+.footer-section ul li a {
+    color: #a0aec0; /* Gris doux */
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+}
 
-        .scenarios-minimal h2 {
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #fff;
-        }
+.footer-section ul li a:hover {
+    color: #fcf6ba; /* Or brillant au survol */
+    padding-left: 5px;
+}
 
-        .s-minimal-grid {
-            display: grid;
-            gap: 15px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+/* Bouton WhatsApp Footer (Version Premium Or) */
+.footer-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #bf953f 0%, #aa771c 100%);
+    color: #000;
+    padding: 14px 25px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 800;
+    margin-bottom: 25px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(191, 149, 63, 0.2);
+}
 
-        .s-min-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 20px 25px;
-            background: var(--gray); /* Couleur modifiée */
-            border: 1px solid rgba(255,255,255,0.05); /* Bordure modifiée */
-            border-radius: 20px;
-            text-align: left;
-            transition: 0.3s;
-            color: var(--text);
-        }
+.footer-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(191, 149, 63, 0.4);
+    background: linear-gradient(135deg, #fcf6ba 0%, #bf953f 100%);
+}
 
-        .s-min-card i {
-            font-size: 1.5rem;
-            color: var(--accent); /* Couleur modifiée */
-            min-width: 30px;
-        }
+/* Réseaux Sociaux Dorés */
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
 
-        .s-min-card p {
-            font-size: 1rem;
-            margin: 0;
-            color: #cbd5e0; /* Couleur modifiée */
-        }
+.footer-socials a {
+    color: #ffffff;
+    font-size: 1.6rem;
+    transition: 0.3s;
+}
 
-        /* Mise en avant du M30 */
-        .highlight-min {
-            border: 2px solid var(--accent); /* Bordure modifiée */
-            background: rgba(0, 210, 255, 0.05); /* Fond modifié */
-            box-shadow: 0 10px 20px rgba(0,210,255,0.1);
-        }
+.footer-socials a:hover {
+    color: #bf953f;
+    transform: scale(1.2);
+}
 
-        /* Petit indicateur pour dire de descendre */
-        .scroll-indicator {
-            margin-top: 40px;
-            color: var(--accent); /* Couleur modifiée */
-            font-weight: 700;
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
-        }
+/* Barre de Copyright */
+.footer-bottom {
+    border-top: 1px solid rgba(191, 149, 63, 0.1);
+    padding-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #718096;
+    letter-spacing: 0.5px;
+}
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .s-minimal-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        /* --- 6. SECTION FORMATIONS --- */
-        .formations h2 { font-size: 2.8rem; text-align: center; margin-bottom: 50px; font-weight: 900; letter-spacing: -1.5px; color: #fff; }
-        .f-grid { display: grid; gap: 25px; }
-        .f-card { 
-            background: var(--gray); /* Couleur modifiée */
-            padding: 45px 30px; 
-            border-radius: 28px; 
-            text-decoration: none; 
-            color: inherit; 
-            transition: var(--transition); 
-            position: relative; 
-            border: 1px solid rgba(255,255,255,0.05); /* Bordure modifiée */
-        }
-        .f-card:hover { 
-            transform: translateY(-12px); 
-            border-color: var(--accent); 
-            background: #1e293b; /* Couleur survol modifiée */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
-        }
-        .f-card:active { transform: scale(0.98); }
-        .f-card i { font-size: 2.8rem; margin-bottom: 25px; color: var(--accent); } /* Couleur modifiée */
-        .f-card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 900; letter-spacing: -0.5px; color: #fff; }
-        .f-card span { 
-            font-weight: 800; 
-            text-decoration: none; 
-            font-size: 0.9rem; 
-            color: var(--accent); 
-            display: inline-block; 
-            margin-top: 10px; 
-            border-bottom: 2px solid var(--accent); 
-        }
-
-        /* --- 7. À PROPOS --- */
-        .about { display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .about-img { 
-            width: 280px; 
-            height: 280px; 
-            border-radius: 35px; 
-            object-fit: cover; 
-            border: 8px solid var(--gray); /* Couleur modifiée */
-            margin-bottom: 35px; 
-            transition: var(--transition); 
-        }
-        .about-img:hover { transform: rotate(3deg) scale(1.05); border-color: var(--accent); }
-        .about h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 25px; letter-spacing: -1px; color: #fff; }
-        .about-stats { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 35px; }
-        .stat-item { 
-            background: var(--gray); /* Couleur modifiée */
-            padding: 18px 28px; 
-            border-radius: 20px; 
-            font-weight: 800; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            font-size: 0.9rem; 
-            color: var(--accent); /* Couleur modifiée */
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* --- 8. TÉMOIGNAGES --- */
-        .testimonials { background: #0f172a; /* Couleur modifiée */ padding: 100px 0; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); }
-        .t-track { display: flex; width: calc(320px * 20); animation: scroll 40s linear infinite; }
-        .t-card { 
-            width: 320px; 
-            background: var(--gray); /* Couleur modifiée */
-            color: var(--text); /* Couleur modifiée */
-            margin: 0 15px; 
-            padding: 40px; 
-            border-radius: 30px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .t-card strong { color: var(--accent); } /* Nom en accent */
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-320px * 10)); } }
-
-        /* --- 9. FAQ --- */
-        .faq-container { max-width: 850px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); /* Bordure modifiée */ padding: 25px 0; cursor: pointer; transition: 0.3s; }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.3px; color: #fff; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); color: #a0aec0; font-size: 1rem; line-height: 1.7; }
-        .faq-item.active .faq-answer { max-height: 300px; margin-top: 20px; }
-        .faq-item i { transition: 0.4s; font-size: 1.2rem; color: var(--accent); }
-        .faq-item.active i { transform: rotate(180deg); }
-
-        /* --- STYLE SECTION FINAL CTA --- */
-        .final-cta {
-            background: linear-gradient(135deg, #1e293b 0%, #0a0f1d 100%); /* Dégradé ajouté */
-            color: var(--text);
-            text-align: center;
-            border-radius: 40px;
-            margin: 40px 20px;
-            padding: 100px 20px;
-            border: 1px solid rgba(0, 210, 255, 0.2); /* Bordure accentuée */
-        }
-
-        .final-cta h2 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            letter-spacing: -1.5px;
-            color: #fff;
-        }
-
-        .final-cta p {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #cbd5e0;
-        }
-
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        /* Bouton secondaire (plus discret) */
-        .btn-secondary {
-            color: var(--accent); /* Couleur modifiée */
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-            font-weight: 700;
-            padding: 10px;
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover {
-            opacity: 1;
-            border-bottom-color: var(--accent);
-        }
-
-        /* Adaptation pour Ordinateur */
-        @media (min-width: 768px) {
-            .cta-buttons {
-                flex-direction: row;
-                justify-content: center;
-                gap: 25px;
-            }
-        } 
-        
-        /* --- STYLE FOOTER --- */
-        .footer {
-            background: #050505; /* Plus sombre pour le pied de page */
-            color: #fff;
-            padding: 60px 20px 20px;
-            border-radius: 40px 40px 0 0;
-            border-top: 1px solid var(--accent); /* Ligne de séparation accent */
-        }
-
-        .footer-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            gap: 40px;
-            padding-bottom: 40px;
-        }
-
-        .footer-section h4 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--accent); /* Couleur modifiée */
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section ul li a {
-            color: #718096; /* Couleur modifiée */
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--accent); /* Couleur modifiée */
-        }
-
-        /* Bouton WhatsApp Footer */
-        .footer-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #25d366;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
-        }
-
-        .footer-whatsapp:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-        }
-
-        /* Réseaux Sociaux */
-        .footer-socials {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-socials a {
-            color: #fff;
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-
-        .footer-socials a:hover {
-            color: var(--accent); /* Couleur modifiée */
-        }
-
-        /* Barre de Copyright */
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #4a5568;
-        }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .footer-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* --- MEDIA QUERIES --- */
-        @media (min-width: 768px) {
-            .hero h1 { font-size: 5rem; }
-            .p-grid, .f-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-            .about { flex-direction: row; text-align: left; gap: 80px; }
-            .hero img { max-width: 700px; }
-        }
-    </style>
+/* --- MEDIA QUERIES (MISE À JOUR) --- */
+@media (min-width: 768px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero h1 { 
+        font-size: 4.5rem; /* Ajusté pour le luxe */
+    }
+    
+    .p-grid, .f-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 30px; 
+    }
+    
+    .about { 
+        flex-direction: row; 
+        text-align: left; 
+        gap: 80px; 
+        justify-content: center;
+    }
+    
+    .hero img { 
+        max-width: 700px; 
+    }
+}
+</style>
 </head>
 <body>
 
@@ -562,7 +821,7 @@
     <section class="section problem">
         <h2 class="reveal">Tu te reconnais ?</h2>
         <div class="p-grid">
-            <div class="p-card reveal"><i class="fas fa-chart-line-down"></i><p>Tu rêves de générer des revenus en ligne, mais tu ne sais pas par où commencer ?</p></div>
+            <div class="p-card reveal"><i class="fa-solid fa-arrow-trend-up"></i><p>Tu rêves de générer des revenus en ligne, mais tu ne sais pas par où commencer ?</p></div>
             <div class="p-card reveal"><i class="fas fa-users-slash"></i><p>Tu as déjà essayé, mais les ventes ne décollent pas ou sont irrégulières ?.</p></div>
             <div class="p-card reveal"><i class="fas fa-question-circle"></i><p>Tu n'as pas de gros capital de départ et tu penses que c'est un frein ?</p></div>
             <div class="p-card reveal"><i class="fas fa-cogs"></i><p>Tu te sens perdu(e) face à la quantité d'informations qui ne sont pas adaptées à notre contexte ?.</p></div>
@@ -572,41 +831,87 @@
     <section class="section">
         <div style="text-align: center;">
             <h2 class="reveal" style="font-size: 2.8rem; font-weight: 900; margin-bottom: 25px; letter-spacing: -1.5px;">La solution M30 SYSTEM</h2>
-            <p class="reveal" style="color: #666; max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">Un écosystème simplifié pour transformer WhatsApp et Mobile Money en machine à encaisser, peu importe ton niveau actuel.</p>
+            <p class="reveal" style="color: #666; max-width: 700px; margin: 0 auto 40px; font-size: 1.1rem;">Un système complet conçu pour t’aider à générer tes premiers revenus en ligne, même si tu pars de zéro.
+
+M30 ne se limite pas à une simple formation.
+C’est un écosystème structuré autour de 3 piliers :
+
+→ Créer une offre simple et rentable
+
+→ Attirer des prospects qualifiés grâce au contenu
+
+→ Transformer ces prospects en clients via WhatsApp et Mobile Money
+
+L’objectif est clair :
+
+te permettre de passer de 0 à des revenus réguliers avec une méthode adaptée à la réalité en Afrique.
+
+Et ce n’est pas tout
+
+En plus de la formation principale, M30 inclut aussi des formations annexes spécialisées pour aller plus loin :
+
+→ Pour ceux qui veulent créer du contenu qui attire et vend beaucoup plus 
+
+→ Pour ceux qui veulent améliorer leurs ventes en discussion
+
+→ Pour ceux qui sont déjà dans le digital mais veulent optimiser leurs résultats
+
+
+Résultat
+Un système simple, duplicable et adapté à ton niveau, que tu sois débutant ou déjà lancé.</p>
             <div class="stat-item reveal" style="display: inline-flex; background: #000; color: #fff; padding: 20px 40px;">100% Optimisé Mobile</div>
         </div>
-    </section>
-    <section class="section scenarios-minimal">
-    <div class="container">
-        <h2 class="reveal">Choisis Ton Point de Départ : Quelle Est Ta Situation Actuelle ?</h2>
-        
-        <div class="s-minimal-grid">
-            <div class="s-min-card reveal">
-                <i class="fas fa-seedling"></i>
-                <p><strong>Scénario 1 :</strong> "Je pars de Zéro / Je suis un Débutant Complet."</p>
-            </div>
+   <section class="section scenarios-minimal">
+<div class="container">
+<h2 class="reveal">Choisis Ton Point de Départ : Quelle Est Ta Situation Actuelle ?</h2>
 
-            <div class="s-min-card reveal highlight-min">
+    <div class="s-minimal-grid">
+        <div class="s-min-card reveal highlight-min" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="s-content" style="display: flex; align-items: center; gap: 15px;">
                 <i class="fas fa-rocket"></i>
-                <p><strong>Scénario 2 :</strong> "Je veux un Système Complet pour Gagner Vraiment."</p>
+                <p><strong>Scénario 1 :</strong> "Je veux un Système Complet pour Gagner Vraiment."</p>
             </div>
+            <a href="https://lgpvphnr.mychariow.shop/prd_798ctp" class="btn-circle-action" style="background: linear-gradient(135deg, #bf953f, #aa771c); color: #000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 15px rgba(191,149,63,0.4); flex-shrink: 0;">
+                <i class="fas fa-arrow-right" style="color: #000; font-size: 1rem; min-width: auto;"></i>
+            </a>
+        </div>
 
-            <div class="s-min-card reveal">
+        <div class="s-min-card reveal" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="s-content" style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-seedling"></i>
+                <p><strong>Scénario 2 :</strong> "Je pars de Zéro / Je suis un Débutant Complet."</p>
+            </div>
+            <a href="https://lgpvphnr.mychariow.shop/prd_v4ga2h" class="btn-circle-action" style="border: 1px solid #bf953f; color: #bf953f; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;">
+                <i class="fas fa-arrow-right" style="font-size: 1rem; min-width: auto;"></i>
+            </a>
+        </div>
+
+        <div class="s-min-card reveal" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="s-content" style="display: flex; align-items: center; gap: 15px;">
                 <i class="fas fa-bullhorn"></i>
                 <p><strong>Scénario 3 :</strong> "J'ai du mal à Attirer des Clients / Mon Contenu ne Vend Pas."</p>
             </div>
+            <a href="https://lgpvphnr.mychariow.shop/prd_1t0tma" class="btn-circle-action" style="border: 1px solid #bf953f; color: #bf953f; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;">
+                <i class="fas fa-arrow-right" style="font-size: 1rem; min-width: auto;"></i>
+            </a>
+        </div>
 
-            <div class="s-min-card reveal">
+        <div class="s-min-card reveal" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="s-content" style="display: flex; align-items: center; gap: 15px;">
                 <i class="fas fa-handshake"></i>
                 <p><strong>Scénario 4 :</strong> "J'ai des Prospects, Mais Je ne Vends Pas Assez."</p>
             </div>
-        </div>
-
-        <div class="scroll-indicator reveal">
-            <p>Découvre les solutions ci-dessous</p>
-            <i class="fas fa-chevron-down"></i>
+            <a href="https://lgpvphnr.mychariow.shop/prd_3pkcou" class="btn-circle-action" style="border: 1px solid #bf953f; color: #bf953f; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;">
+                <i class="fas fa-arrow-right" style="font-size: 1rem; min-width: auto;"></i>
+            </a>
         </div>
     </div>
+
+    <div class="scroll-indicator reveal">
+        <p>Découvre les solutions ci-dessous</p>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+</div>
 </section>
     <section class="section formations" id="formations">
         <h2 class="reveal">Nos Formations</h2>
@@ -655,16 +960,16 @@
         <div class="t-track">
             <div class="t-card"><p>"J’ai fait mes premières ventes grâce à M30 en 1 semaine."</p><strong>Junior</strong></div>
             <div class="t-card"><p>"Enfin un système adapté au Mobile Money et WhatsApp."</p><strong>Grâce</strong></div>
-            <div class="t-card"><p>"Je ne pensais pas gagner autant avec mon tel Depuis la rdc."</p><strong>Kevin</strong></div>
+            <div class="t-card"><p>"Je ne pensais pas gagner autant avec mon tel Depuis la rdc."</p><strong>Tshimanga</strong></div>
             <div class="t-card"><p>"Les vidéos sont claires, puissantes et faciles."</p><strong>Sandra</strong></div>
             <div class="t-card"><p>"Accompagnement et résultats rapides."</p><strong>Olivier</strong></div>
             <div class="t-card"><p>"Une formation complète pour changer de vie."</p><strong>Moussa</strong></div>
-            <div class="t-card"><p>"Le meilleur investissement de mon année."</p><strong>Anita</strong></div>
+            <div class="t-card"><p>"Le meilleur investissement de mon année."</p><strong>Esther</strong></div>
             <div class="t-card"><p>"J'ai multiplié mes ventes par 3 en un mois."</p><strong>Fabrice</strong></div>
             <div class="t-card"><p>"Clair, précis et redoutablement efficace."</p><strong>Raïssa</strong></div>
-            <div class="t-card"><p>"C'est la clé du succès digital aujourd'hui."</p><strong>Jean</strong></div>
-            <div class="t-card"><p>"J’ai fait mes premières ventes grâce à M30."</p><strong>Junior</strong></div>
-            <div class="t-card"><p>"Enfin un système simple."</p><strong>Grâce</strong></div>
+            <div class="t-card"><p>"C'est la clé du succès digital aujourd'hui."</p><strong>Jean pierre</strong></div>
+            <div class="t-card"><p>"J’ai fait mes premières ventes grâce à M30."</p><strong>lusala</strong></div>
+            <div class="t-card"><p>"Enfin un système simple."</p><strong>kabangu</strong></div>
         </div>
     </section>
 
